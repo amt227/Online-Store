@@ -4,6 +4,7 @@ import SEO from "../components/seo"
 import { FaItchIo } from "react-icons/fa"
 import { Link, graphql } from "gatsby"
 import BackgroundSection from "../components/globals/BackgroundSection"
+import Info from "../components/home/Info"
 
 const IndexPage = ({ data }) => (
   <Layout>
@@ -13,6 +14,7 @@ const IndexPage = ({ data }) => (
       title="Regular Joe's"
       styleClass="default-background"
     />
+    <Info/>
   </Layout>
 )
 
