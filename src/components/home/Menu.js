@@ -2,12 +2,36 @@ import React, { Component } from "react"
 import Title from "../globals/Title"
 import Img from "gatsby-image"
 
+const getCategories = items => {
+  let tempItems = items.map(item => {
+    return item.node.category
+  })
+  let tempCategories = new Set(tempItems)
+  let categories = Array.from(tempCategories)
+  categories = ["All", ...categories]
+  return categories
+}
+
 export default class Menu extends Component {
   constructor(props) {
     super(props)
     this.state = {
       items: props.items.edges,
       productItems: props.items.edges,
+      categories: getCategories(props.items.edges),
+    }
+  }
+  handleItems = category => {
+    let tempItems = [...this.state.items]
+    if (category === "All") {
+      this.setState(() => {
+        return { productItems: tempItems }
+      })
+    } else {
+      let items = tempItems.filter(({ node }) => node.category === category)
+      this.setState(() => {
+        return { productItems: items }
+      })
     }
   }
   render() {
@@ -16,7 +40,24 @@ export default class Menu extends Component {
         <section className="menu py-5">
           <div className="container">
             <Title title="Best of our menu" />
-
+            <div className="row mb-5">
+              <div className="col-10 mx-auto text-center">
+                {this.state.categories.map((category, index) => {
+                  return (
+                    <button
+                      type="button"
+                      key={index}
+                      className="btn btn-yellow text-capitalize m-3"
+                      onClick={() => {
+                        this.handleItems(category)
+                      }}
+                    >
+                      {category}
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
             <div className="row">
               {this.state.productItems.map(({ node }) => {
                 return (
