@@ -1,8 +1,7 @@
 import React from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { FaItchIo } from "react-icons/fa"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import BackgroundSection from "../components/globals/BackgroundSection"
 import Info from "../components/home/Info"
 import Menu from "../components/home/Menu"
@@ -17,10 +16,10 @@ const IndexPage = ({ data }) => (
       title="Regular Joe's"
       styleClass="default-background"
     />
-    <Info/>
-    <Menu items={data.menu}/>
-    <Products/>
-    <Contact/>
+    <Info />
+    <Menu items={data.menu} />
+    <Products />
+    <Contact />
   </Layout>
 )
 
@@ -44,7 +43,7 @@ export const query = graphql`
             description
           }
           image {
-            fixed(height: 50, width: 50){
+            fixed(height: 50, width: 50) {
               ...GatsbyContentfulFixed_tracedSVG
             }
           }
